@@ -7,18 +7,16 @@
 ```
 src/
 ├── main/java/com/example/bdd/
-│   └── BankAccount.java         # 銀行口座クラス（預金、引き出し、口座開設）
+│   └── BankAccount.java         # 銀行口座クラス
 └── test/
     ├── java/com/example/bdd/
-    │   ├── BankAccountSteps.java    # 銀行口座のステップ定義
-    │   └── CucumberTestRunner.java  # Cucumberテストランナー
-    └── resources/features/
-        ├── account/
-        │   ├── management/           # 口座管理
-        │   │   └── opening.feature  # 口座開設
-        │   └── transaction/         # 口座取引
-        │       ├── deposit.feature  # 預金
-        │       └── withdrawal.feature # 引き出し
+    │   ├── BankAccountSteps.java    # ステップ定義
+    │   └── CucumberTestRunner.java  # テストランナー
+    └── resources/features/account/
+        ├── management/opening.feature      # 口座開設
+        └── transaction/
+            ├── deposit.feature             # 預金
+            └── withdrawal.feature         # 引き出し
 ```
 
 ## 技術スタック
