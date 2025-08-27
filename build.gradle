@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0.0'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Cucumber-JVM
+    testImplementation 'io.cucumber:cucumber-java:7.15.0'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.15.0'
+    testImplementation 'io.cucumber:cucumber-picocontainer:7.15.0'
+    
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
+    
+    // アサーション用
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+}
+
+test {
+    useJUnitPlatform()
+    
+    // Cucumberテストの実行設定
+    systemProperty 'cucumber.junit-platform.naming-strategy', 'long'
+    systemProperty 'cucumber.publish.enabled', 'true'
+    systemProperty 'cucumber.filter.tags', 'not @ignore'
+    
+    // テストの並列実行を無効化（Cucumberの安定性向上）
+    maxParallelForks = 1
+}
+
+// Cucumberテストの実行タスク
+task cucumberTest(type: Test) {
+    useJUnitPlatform()
+    systemProperty 'cucumber.junit-platform.naming-strategy', 'long'
+    systemProperty 'cucumber.publish.enabled', 'true'
+    
+    // フィーチャーファイルの場所を指定
+    systemProperty 'cucumber.features', 'src/test/resources/features'
+}
+
+// メインクラスの指定（必要に応じて）
+mainClassName = 'com.example.bdd.Main'
